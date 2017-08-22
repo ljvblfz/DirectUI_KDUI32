@@ -1,0 +1,27 @@
+HKCR
+{
+	DUIButton.CommandButton.1 = s 'CommandButton Class'
+	{
+		CLSID = s '{579147B8-9D94-481A-B200-C1CBD03FA01C}'
+	}
+	DUIButton.CommandButton = s 'CommandButton Class'
+	{
+		CLSID = s '{579147B8-9D94-481A-B200-C1CBD03FA01C}'
+		CurVer = s 'DUIButton.CommandButton.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {579147B8-9D94-481A-B200-C1CBD03FA01C} = s 'CommandButton Class'
+		{
+			ProgID = s 'DUIButton.CommandButton.1'
+			VersionIndependentProgID = s 'DUIButton.CommandButton'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{232589C6-ADC9-4B95-8D3F-CBBFCAEC5999}'
+		}
+	}
+}

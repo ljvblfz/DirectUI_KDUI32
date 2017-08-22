@@ -1,0 +1,27 @@
+HKCR
+{
+	DirectUICom.ImageSecProp.1 = s 'ImageSecProp Class'
+	{
+		CLSID = s '{61EB4F7C-D704-4A63-B99E-B4CAB91DA653}'
+	}
+	DirectUICom.ImageSecProp = s 'ImageSecProp Class'
+	{
+		CLSID = s '{61EB4F7C-D704-4A63-B99E-B4CAB91DA653}'
+		CurVer = s 'DirectUICom.ImageSecProp.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {61EB4F7C-D704-4A63-B99E-B4CAB91DA653} = s 'ImageSecProp Class'
+		{
+			ProgID = s 'DirectUICom.ImageSecProp.1'
+			VersionIndependentProgID = s 'DirectUICom.ImageSecProp'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{8DFE948B-ABC6-4FCA-8BEF-28FA10C8D799}'
+		}
+	}
+}

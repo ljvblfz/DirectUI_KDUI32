@@ -1,0 +1,27 @@
+HKCR
+{
+	DirectUICom.DUIPropBase.1 = s 'DUIPropBase Class'
+	{
+		CLSID = s '{E79081BC-AEAB-4315-8181-7C1069611966}'
+	}
+	DirectUICom.DUIPropBase = s 'DUIPropBase Class'
+	{
+		CLSID = s '{E79081BC-AEAB-4315-8181-7C1069611966}'
+		CurVer = s 'DirectUICom.DUIPropBase.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {E79081BC-AEAB-4315-8181-7C1069611966} = s 'DUIPropBase Class'
+		{
+			ProgID = s 'DirectUICom.DUIPropBase.1'
+			VersionIndependentProgID = s 'DirectUICom.DUIPropBase'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{8DFE948B-ABC6-4FCA-8BEF-28FA10C8D799}'
+		}
+	}
+}

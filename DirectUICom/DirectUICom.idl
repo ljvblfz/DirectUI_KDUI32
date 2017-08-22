@@ -1,0 +1,415 @@
+// DirectUICom.idl : DirectUICom 的 IDL 源
+//
+
+// 此文件将由 MIDL 工具处理以
+// 产生类型库(DirectUICom.tlb)和封送处理代码。
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+#include "defines.h"
+
+[
+	object,
+	uuid(B86ED3F4-D992-4BE0-8BCC-EC98F707D5B8),
+	dual,
+	nonextensible,
+	helpstring("IDUIObj 接口"),
+	pointer_default(unique)
+]
+interface IDUIObj : IDispatch{
+	[id(1), helpstring("方法SetName")] HRESULT SetName([in] BSTR strName);
+	[id(3), helpstring("方法SetObjPtr")] HRESULT SetObjPtr([in] OLE_HANDLE pObjPtr);
+	[id(4), helpstring("方法GetObjPtr")] HRESULT GetObjPtr([out,retval] OLE_HANDLE* pObjPtr);
+	[id(5), helpstring("方法GetName")] HRESULT GetName([out,retval] BSTR* pResult);
+	[id(6), helpstring("方法GetType")] HRESULT GetType([out,retval] enumDUIObjType* pType);
+	[id(7), helpstring("方法SetDUIRes")] HRESULT SetDUIRes([in]IDUIRes* pDUIRes);
+	[id(8), helpstring("方法GetDUIRes")] HRESULT GetDUIRes([out,retval]IDUIRes** ppResult);
+};
+
+
+
+[
+	object,
+	uuid(5AB7FEEC-BA1B-494C-A493-4D96F84AF804),
+	dual,
+	nonextensible,
+	helpstring("IDUIRes 接口"),
+	pointer_default(unique)
+]
+interface IDUIRes : IDispatch{
+	[id(1), helpstring("方法GetDUIResObjPtr")] HRESULT GetDUIResObjPtr([out,retval]OLE_HANDLE *plResObjPtr);
+	[id(2), helpstring("方法OpenSkin")] HRESULT OpenSkin([out,retval]VARIANT_BOOL *pbResult);
+	[id(3), helpstring("方法CloseSkin")] HRESULT CloseSkin([out,retval]VARIANT_BOOL *pbResult);
+	[id(4), helpstring("方法CreateDirectUI")] HRESULT CreateDirectUI([in]OLE_HANDLE hWnd,[out,retval]IDirectUI **pResult);
+	[id(5), helpstring("方法CreateControl")] HRESULT CreateControl([in]IDirectUI* pDirectUI,[in]BSTR strCLSID,[out,retval]IDUIControlBase **pResult);
+	[id(6), helpstring("方法LoadImage")] HRESULT LoadImage([in]BSTR strImagePath,[out,retval]IDUIRenderImage **ppResult);
+};
+[
+	object,
+	uuid(14B2ECE4-0F5D-4908-B93E-31171E55623A),
+	dual,
+	nonextensible,
+	helpstring("ISkinObjResBase 接口"),
+	pointer_default(unique)
+]
+interface ISkinObjResBase : IDUIObj{
+	[id(101), helpstring("方法SetRect")] HRESULT SetRect([in]SkinRect rect);
+	[id(102), helpstring("方法GetRect")] HRESULT GetRect([out,retval]SkinRect *pRect);
+
+
+};
+
+
+[
+	object,
+	uuid(03309FFE-02D3-4805-8128-93A19B70D916),
+	dual,
+	nonextensible,
+	helpstring("IDirectUI 接口"),
+	pointer_default(unique)
+]
+interface IDirectUI : ISkinObjResBase{
+	[id(201), helpstring("方法Create")] HRESULT Create([in]OLE_HANDLE hWnd,[in]SkinRect rect,[out,retval]VARIANT_BOOL* pbResult);
+	[id(202), helpstring("方法GetHwnd")] HRESULT GetHwnd([out,retval]OLE_HANDLE * phResult);
+};
+
+
+[
+	object,
+	uuid(F47017B7-3D4B-4972-A592-0698F84CCB1A),
+	dual,
+	nonextensible,
+	helpstring("IDUIControlBase 接口"),
+	pointer_default(unique)
+]
+interface IDUIControlBase : ISkinObjResBase{
+	[id(200), helpstring("方法CreateProps")] HRESULT CreateProps([out,retval] VARIANT_BOOL* pbResult);
+	[id(201), helpstring("方法RenderDrawObject")] HRESULT RenderDrawObject([in] IDUIRenderDC* pDC, [in] SkinRect* rect, [out,retval] VARIANT_BOOL* pbResult);
+	[id(202), helpstring("方法EventNotify")] HRESULT EventNotify([in]DUINotify *peVentNotify,[out,retval]VARIANT_BOOL *pbResult);
+
+	[id(203), helpstring("方法GetControlTypeName")] HRESULT GetControlTypeName([out,retval]BSTR* pstrResult);
+	[id(204), helpstring("方法GetAuthorInfo")] HRESULT GetAuthorInfo([out]BSTR *pbstrAuthorName,[out]BSTR *pbstrCompany,[out]BSTR *pbstrUrl,[out]BSTR *pbstrVersion);
+	[id(205), helpstring("方法GetControlIcon")] HRESULT GetControlIcon([in]int nWidth,[in]int nHeight,[out,retval]OLE_HANDLE* phIcon);
+	[id(206), helpstring("方法GetDragCursor")] HRESULT GetDragCursor([out,retval]OLE_HANDLE *phCursor);
+	[id(207), helpstring("方法SetClassId")] HRESULT SetClassId([in]BSTR clsId);
+	[id(208), helpstring("方法GetClassId")] HRESULT GetClassId([out,retval]BSTR* clsId);
+	[id(209), helpstring("方法GetCategoryName")] HRESULT GetCategoryName([out,retval]BSTR* pstrResult);
+	[id(210), helpstring("method CreateGroupProp")] HRESULT CreateGroupProp([in]ICtrlPluginProp *pParentProp,[in]BSTR strPropName,[in]VARIANT_BOOL bExpand,[out,retval]ICtrlPluginProp **ppProp);
+	[id(211), helpstring("method CreateProp")] HRESULT CreateProp([in]ICtrlPluginProp* pPropParent,[in]enumPropType eType,[in]BSTR strPropName,[in]BSTR strPropHelp,[in]VARIANT_BOOL bIsStyle,[out,retval]IDUIPropBase **ppProp);
+
+	[id(212), helpstring("method AddProp")] HRESULT AddProp(ICtrlPluginProp* pProp);
+	[id(213), helpstring("method GetPropList")] HRESULT GetPropList(OLE_HANDLE *pPropList);
+
+	[id(214), helpstring("method SetRealCtrlPtr")] HRESULT SetRealCtrlPtr([in]IDUIControlBase* pCtrlBase);
+	[id(215), helpstring("method GetRealCtrlPtr")] HRESULT GetRealCtrlPtr([out,retval]IDUIControlBase** ppCtrlBase);
+
+	[id(216), helpstring("method FinalCreate")] HRESULT FinalCreate(VARIANT_BOOL bNewObject);
+	[id(217), helpstring("method GetInterface")] HRESULT GetInterface([in]OLE_HANDLE pIID,[out,retval]IDispatch **ppResult);
+};
+
+
+[
+	object,
+	uuid(C9F3161D-6F06-4295-AC1B-84D587221CE1),
+	dual,
+	nonextensible,
+	helpstring("IDUIRenderDC 接口"),
+	pointer_default(unique)
+]
+interface IDUIRenderDC : IDispatch{
+	[id(1), helpstring("方法SetRenderDCPtr")] HRESULT SetRenderDCPtr([in]OLE_HANDLE pRenderDC);
+	[id(2), helpstring("方法GetRenderDCPtr")] HRESULT GetRenderDCPtr([out,retval]OLE_HANDLE *pRenderDC);
+};
+[
+	object,
+	uuid(2A574773-9F1C-4F03-82FD-B7590762517D),
+	dual,
+	nonextensible,
+	helpstring("ICtrlPluginProp 接口"),
+	pointer_default(unique)
+]
+interface ICtrlPluginProp : IDispatch{
+		[id(1), propget, helpstring("property bGroup")] HRESULT bGroup([out, retval] VARIANT_BOOL *pVal);
+		[id(1), propput, helpstring("property bGroup")] HRESULT bGroup([in] VARIANT_BOOL newVal);
+		[id(2), propget, helpstring("property strName")] HRESULT strName([out, retval] BSTR *pVal);
+		[id(2), propput, helpstring("property strName")] HRESULT strName([in] BSTR newVal);
+		[id(3), helpstring("method AddSkinProp")] HRESULT AddSkinProp([in]IDUIPropType* pSkinProp);
+		[id(4), helpstring("method RemoveSkinProp")] HRESULT RemoveSkinProp([in]IDUIPropType* pSkinProp);
+		[id(5), helpstring("method AddProp")] HRESULT AddProp([in]ICtrlPluginProp* pSubProp);
+		[id(6), helpstring("method RemoveProp")] HRESULT RemoveProp([in]ICtrlPluginProp* pSubProp);
+		[id(11), helpstring("method AccessConfig")] HRESULT AccessConfig([in]OLE_HANDLE pXmlEle,[in]VARIANT_BOOL bRead,[out,retval]VARIANT_BOOL* pbResult);
+		[id(13), helpstring("method Expand")] HRESULT Expand([in]VARIANT_BOOL bExpand);
+		[id(14), helpstring("method IsExpand")] HRESULT IsExpand([out,retval]VARIANT_BOOL* pbResult);
+		[id(15), helpstring("method SetParent")] HRESULT SetParent([in]ICtrlPluginProp* pParent);
+		[id(16), helpstring("method GetParent")] HRESULT GetParent([out,retval]ICtrlPluginProp** pProp);
+		[id(17), helpstring("method GetSkinPropTypeCount")] HRESULT GetSkinPropTypeCount([out,retval]long* plResult);
+		[id(18), helpstring("method GetSkinPropTypeFromIndex")] HRESULT GetSkinPropTypeFromIndex([in]long nIndex,[out,retval]IDUIPropType** pPropType);
+		[id(19), helpstring("method GetAddinPropCount")] HRESULT GetAddinPropCount([out,retval]long* plResult);
+		[id(20), helpstring("method GetAddinPropByIndex")] HRESULT GetAddinPropByIndex([in]long nIndex,[out,retval]ICtrlPluginProp** pAddinProp);
+		[id(21), helpstring("method GetDUIRes")] HRESULT GetDUIRes([out,retval]IDUIRes** ppDUIRes);
+		[id(22), helpstring("方法SetDUIRes")] HRESULT SetDUIRes([in]IDUIRes *pDUIRes);
+		[id(23), helpstring("方法GetControlBasePtr")] HRESULT GetControlBasePtr([out,retval]IDUIControlBase **ppResult);
+		[id(24), helpstring("方法SetControlBasePtr")] HRESULT SetControlBasePtr([in]IDUIControlBase *pCtrlBase);
+		[id(25), helpstring("method AccessConfig2")] HRESULT AccessConfig2([in]BSTR strParentName,[in]OLE_HANDLE pXmlEle,[in]VARIANT_BOOL bRead,[out,retval]VARIANT_BOOL* pbResult);
+		[id(26), helpstring("method AddPropBase")] HRESULT AddPropBase([in]IDUIPropBase* pProp);
+		[id(27), helpstring("method RemovePropBase")] HRESULT RemovePropBase([in]IDUIPropBase* pProp);
+		[id(28), helpstring("method RemoveAllPropBase")] HRESULT RemoveAllPropBase();
+		[id(29), helpstring("method GetPropBaseCount")] HRESULT GetPropBaseCount([out,retval]LONG* pResult);
+		[id(30), helpstring("method GetAtPropBase")] HRESULT GetAtPropBase([in]LONG nIndex,[out,retval]IDUIPropBase** ppResult);
+		[id(31), helpstring("method AccessConfig3")] HRESULT AccessConfig3([in]BSTR strParentName,[in]OLE_HANDLE pXmlEle,[in]VARIANT_BOOL bRead,[out,retval]VARIANT_BOOL* pbResult);
+};
+[
+	object,
+	uuid(C6A1AB1D-A87C-4238-990C-903DA0B5EE8D),
+	dual,
+	nonextensible,
+	helpstring("IDUIPropBase 接口"),
+	pointer_default(unique)
+]
+interface IDUIPropBase : IDispatch{
+	[id(1), helpstring("方法SetName")] HRESULT SetName([in] BSTR strName);
+	[id(2), helpstring("方法GetName")] HRESULT GetName([out,retval] BSTR* pResult);
+	[id(3), helpstring("方法SetHelp")] HRESULT SetHelp([in] BSTR strHelp);
+	[id(4), helpstring("方法GetHelp")] HRESULT GetHelp([out,retval] BSTR* pResult);
+	[id(5), helpstring("方法SetType")] HRESULT SetType([in] enumPropType eType);
+	[id(6), helpstring("方法GetType")] HRESULT GetType([out,retval] enumPropType* pResult);
+	[id(7), helpstring("方法SetVariant")] HRESULT SetVariant([in] VARIANT vt);
+	[id(8), helpstring("方法GetVariant")] HRESULT GetVariant([out,retval] VARIANT* pResult);
+	[id(9), helpstring("方法AccessConfig")] HRESULT AccessConfig([in]OLE_HANDLE pXmlEle,[in]BSTR strKeyName,[in]VARIANT_BOOL bRead,[in]VARIANT_BOOL bCompleteUseKey,[out,retval]VARIANT_BOOL *pbResult);
+	[id(10), helpstring("方法GetPropTypePtr")] HRESULT GetPropTypePtr([out,retval]IDUIPropType **ppDUIPropType);
+};
+[
+	object,
+	uuid(9DFCB11F-E48E-4C77-B581-440C3EE18418),
+	dual,
+	nonextensible,
+	helpstring("IDUIRenderImage 接口"),
+	pointer_default(unique)
+]
+interface IDUIRenderImage : IDispatch{
+};
+[
+	object,
+	uuid(C108259D-0728-453B-BBF0-B6D6572C5FD2),
+	dual,
+	nonextensible,
+	helpstring("IDUIPropType 接口"),
+	pointer_default(unique)
+]
+interface IDUIPropType : IDispatch{
+	[propget, id(1), helpstring("属性 eType")] HRESULT eType([out, retval] enumPropType* pVal);
+	[propput, id(1), helpstring("属性 eType")] HRESULT eType([in] enumPropType newVal);
+	[propget, id(2), helpstring("属性 strName")] HRESULT strName([out, retval] BSTR* pVal);
+	[propput, id(2), helpstring("属性 strName")] HRESULT strName([in] BSTR newVal);
+	[propget, id(3), helpstring("属性 vtValue")] HRESULT vtValue([out, retval] VARIANT* pVal);
+	[propput, id(3), helpstring("属性 vtValue")] HRESULT vtValue([in] VARIANT newVal);
+	[propget, id(4), helpstring("属性 strValue")] HRESULT strValue([out, retval] BSTR* pVal);
+	[propput, id(4), helpstring("属性 strValue")] HRESULT strValue([in] BSTR newVal);
+	[id(5), helpstring("方法GetPropBase")] HRESULT GetPropBase([out,retval] IDUIPropBase** pResult);
+	[id(6), helpstring("方法SetPropBase")] HRESULT SetPropBase([in] IDUIPropBase* pPropBase);
+	[id(7), helpstring("方法GetParentProp")] HRESULT GetParentProp(ICtrlPluginProp** pResult);
+	[id(8), helpstring("方法SetParentProp")] HRESULT SetParentProp([in] ICtrlPluginProp* pProp);
+	[propget, id(9), helpstring("property bAccess")] HRESULT bAccess([out, retval] VARIANT_BOOL *pVal);
+	[propput, id(9), helpstring("property bAccess")] HRESULT bAccess([in] VARIANT_BOOL newVal);
+};
+[
+	object,
+	uuid(B34B96BC-B2A6-4201-A4A4-42E5F6979D05),
+	dual,
+	nonextensible,
+	helpstring("IImageSecProp 接口"),
+	pointer_default(unique)
+]
+interface IImageSecProp : IDUIPropBase{
+	[id(100), helpstring("方法RenderDraw")] HRESULT RenderDraw([in] IDUIRenderDC* pDC, [in] SkinRect* rect, [out,retval]VARIANT_BOOL* pbResult);
+	[id(101), helpstring("方法SetImageBase")] HRESULT SetImageBase([in]DUIImageBase *pImgbase,[out,retval]VARIANT_BOOL* pbResult);
+	[id(102), helpstring("方法GetImageBase")] HRESULT GetImageBase([out,retval]DUIImageBase *pImgbase);
+};
+[
+	uuid(8DFE948B-ABC6-4FCA-8BEF-28FA10C8D799),
+	version(1.0),
+	helpstring("DirectUICom 1.0 类型库")
+]
+library DirectUIComLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(94DBF17C-B560-44DC-BDBE-0B643CE06580),
+		helpstring("DUIObj Class")
+	]
+	coclass DUIObj
+	{
+		[default] interface IDUIObj;
+	};
+	[
+		uuid(65FF75C4-8FAF-4471-AE5E-F1E931BF3D74),
+		helpstring("DUIRes Class")
+	]
+	coclass DUIRes
+	{
+		[default] interface IDUIRes;
+	};
+	[
+		uuid(DCDA7594-43C0-4A4B-B291-E5D3523BBB34),
+		helpstring("_ISkinObjResBaseEvents 接口")
+	]
+	dispinterface _ISkinObjResBaseEvents
+	{
+		properties:
+		methods:
+	};
+	[
+		uuid(7819C697-E25A-423E-A1F5-DD548D9DF78A),
+		helpstring("SkinObjResBase Class")
+	]
+	coclass SkinObjResBase
+	{
+		[default] interface ISkinObjResBase;
+		[default, source] dispinterface _ISkinObjResBaseEvents;
+	};
+	[
+		uuid(9CB33407-27E8-4EF4-A866-9489D425327E),
+		helpstring("_IDirectUIEvents 接口")
+	]
+	dispinterface _IDirectUIEvents
+	{
+		properties:
+		methods:
+	};
+	[
+		uuid(CB51E107-2C85-4412-B40E-11AF85606574),
+		helpstring("DirectUI Class")
+	]
+	coclass DirectUI
+	{
+		[default] interface IDirectUI;
+		[default, source] dispinterface _IDirectUIEvents;
+	};
+	[
+		uuid(92892847-ABE0-4868-9E74-879AE256C3C8),
+		helpstring("_IDUIControlBaseEvents 接口")
+	]
+	dispinterface _IDUIControlBaseEvents
+	{
+		properties:
+		methods:
+	};
+	[
+		uuid(79A2FA67-7FBB-45EC-B314-FEE65C3B2254),
+		helpstring("DUIControlBase Class")
+	]
+	coclass DUIControlBase
+	{
+		[default] interface IDUIControlBase;
+		[default, source] dispinterface _IDUIControlBaseEvents;
+	};
+	[
+		uuid(F9EEA0FC-6EB0-401B-9814-12723947D06D),
+		helpstring("_IDUIRenderDCEvents 接口")
+	]
+	dispinterface _IDUIRenderDCEvents
+	{
+		properties:
+		methods:
+	};
+	[
+		uuid(40F8EA43-94CE-44E0-A54A-B733F7D3DBF5),
+		helpstring("DUIRenderDC Class")
+	]
+	coclass DUIRenderDC
+	{
+		[default] interface IDUIRenderDC;
+		[default, source] dispinterface _IDUIRenderDCEvents;
+	};
+	[
+		uuid(EC5DD864-86F1-47A2-B25F-215C9F408FBB),
+		helpstring("_ICtrlPluginPropEvents 接口")
+	]
+	dispinterface _ICtrlPluginPropEvents
+	{
+		properties:
+		methods:
+	};
+	[
+		uuid(574F6A37-C1F3-49B6-8ACF-F9D6DEC7CD95),
+		helpstring("CtrlPluginProp Class")
+	]
+	coclass CtrlPluginProp
+	{
+		[default] interface ICtrlPluginProp;
+		[default, source] dispinterface _ICtrlPluginPropEvents;
+	};
+	[
+		uuid(10C526DC-AAF6-4148-8C5B-12A30E0C7AF4),
+		helpstring("_IDUIPropBaseEvents 接口")
+	]
+	dispinterface _IDUIPropBaseEvents
+	{
+		properties:
+		methods:
+	};
+	[
+		uuid(E79081BC-AEAB-4315-8181-7C1069611966),
+		helpstring("DUIPropBase Class")
+	]
+	coclass DUIPropBase
+	{
+		[default] interface IDUIPropBase;
+		[default, source] dispinterface _IDUIPropBaseEvents;
+	};
+	[
+		uuid(81AC220B-99DF-4713-95D3-B31FA43B27C0),
+		helpstring("_IDUIRenderImageEvents 接口")
+	]
+	dispinterface _IDUIRenderImageEvents
+	{
+		properties:
+		methods:
+	};
+	[
+		uuid(03E76D48-BED7-441D-8A59-E9085D1F1D8B),
+		helpstring("DUIRenderImage Class")
+	]
+	coclass DUIRenderImage
+	{
+		[default] interface IDUIRenderImage;
+		[default, source] dispinterface _IDUIRenderImageEvents;
+	};
+	[
+		uuid(A33F4930-2602-47A9-91B3-24CF651FA290),
+		helpstring("_IDUIPropTypeEvents 接口")
+	]
+	dispinterface _IDUIPropTypeEvents
+	{
+		properties:
+		methods:
+	};
+	[
+		uuid(83252221-F552-454B-A7DE-F361136402ED),
+		helpstring("DUIPropType Class")
+	]
+	coclass DUIPropType
+	{
+		[default] interface IDUIPropType;
+		[default, source] dispinterface _IDUIPropTypeEvents;
+	};
+	[
+		uuid(48F0F136-9CAF-41D7-9660-406CC75642DD),
+		helpstring("_IImageSecPropEvents 接口")
+	]
+	dispinterface _IImageSecPropEvents
+	{
+		properties:
+		methods:
+	};
+	[
+		uuid(61EB4F7C-D704-4A63-B99E-B4CAB91DA653),
+		helpstring("ImageSecProp Class")
+	]
+	coclass ImageSecProp
+	{
+		[default] interface IImageSecProp;
+		[default, source] dispinterface _IImageSecPropEvents;
+	};
+};

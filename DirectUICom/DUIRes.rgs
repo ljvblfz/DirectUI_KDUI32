@@ -1,0 +1,27 @@
+HKCR
+{
+	DirectUICom.DUIRes.1 = s 'DUIRes Class'
+	{
+		CLSID = s '{65FF75C4-8FAF-4471-AE5E-F1E931BF3D74}'
+	}
+	DirectUICom.DUIRes = s 'DUIRes Class'
+	{
+		CLSID = s '{65FF75C4-8FAF-4471-AE5E-F1E931BF3D74}'
+		CurVer = s 'DirectUICom.DUIRes.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {65FF75C4-8FAF-4471-AE5E-F1E931BF3D74} = s 'DUIRes Class'
+		{
+			ProgID = s 'DirectUICom.DUIRes.1'
+			VersionIndependentProgID = s 'DirectUICom.DUIRes'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{8DFE948B-ABC6-4FCA-8BEF-28FA10C8D799}'
+		}
+	}
+}

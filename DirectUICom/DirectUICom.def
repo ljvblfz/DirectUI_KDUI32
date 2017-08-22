@@ -1,0 +1,11 @@
+; DirectUICom.def : 定义模块参数。
+
+LIBRARY      "DirectUICom.DLL"
+
+EXPORTS
+	DllCanUnloadNow		PRIVATE
+	DllGetClassObject	PRIVATE
+	DllRegisterServer	PRIVATE
+	DllUnregisterServer	PRIVATE
+    OpenUI @1
+	CloseUI @2

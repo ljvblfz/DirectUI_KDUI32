@@ -1,0 +1,27 @@
+HKCR
+{
+	DirectUICom.CtrlPluginProp.1 = s 'CtrlPluginProp Class'
+	{
+		CLSID = s '{574F6A37-C1F3-49B6-8ACF-F9D6DEC7CD95}'
+	}
+	DirectUICom.CtrlPluginProp = s 'CtrlPluginProp Class'
+	{
+		CLSID = s '{574F6A37-C1F3-49B6-8ACF-F9D6DEC7CD95}'
+		CurVer = s 'DirectUICom.CtrlPluginProp.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {574F6A37-C1F3-49B6-8ACF-F9D6DEC7CD95} = s 'CtrlPluginProp Class'
+		{
+			ProgID = s 'DirectUICom.CtrlPluginProp.1'
+			VersionIndependentProgID = s 'DirectUICom.CtrlPluginProp'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{8DFE948B-ABC6-4FCA-8BEF-28FA10C8D799}'
+		}
+	}
+}

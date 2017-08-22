@@ -1,0 +1,53 @@
+// DUIButton.idl : DUIButton 的 IDL 源
+//
+
+// 此文件将由 MIDL 工具处理以
+// 产生类型库(DUIButton.tlb)和封送处理代码。
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+import "DirectUICom.idl";
+
+#include "defines.h"
+
+
+[
+	object,
+	uuid(0EA328C4-C227-4010-ADF7-B2AF771A0F83),
+	dual,
+	nonextensible,
+	helpstring("ICommandButton 接口"),
+	pointer_default(unique)
+]
+interface ICommandButton : IDUIControlBase{
+	[id(500), helpstring("方法SetText")]HRESULT SetText([in]BSTR strText,[out,retval]VARIANT_BOOL* pbResult);
+	[id(501), helpstring("方法SetBackImage")] HRESULT SetBackImage([in]DUIImageBase *pImageBase,[in]eDUI_BUTTON_STATUS eStatus,[out,retval]VARIANT_BOOL* pbResult);
+};
+[
+	uuid(232589C6-ADC9-4B95-8D3F-CBBFCAEC5999),
+	version(1.0),
+	helpstring("DUIButton 1.0 类型库")
+]
+library DUIButtonLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(0B4DD27C-0F9E-4409-81F0-348A2560DAA9),
+		helpstring("_ICommandButtonEvents 接口")
+	]
+	dispinterface _ICommandButtonEvents
+	{
+		properties:
+		methods:
+	};
+	[
+		uuid(579147B8-9D94-481A-B200-C1CBD03FA01C),
+		helpstring("CommandButton Class")
+	]
+	coclass CommandButton
+	{
+		[default] interface ICommandButton;
+		[default, source] dispinterface _ICommandButtonEvents;
+	};
+};

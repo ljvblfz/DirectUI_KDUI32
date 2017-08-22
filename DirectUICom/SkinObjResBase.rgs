@@ -1,0 +1,27 @@
+HKCR
+{
+	DirectUICom.SkinObjResBase.1 = s 'SkinObjResBase Class'
+	{
+		CLSID = s '{7819C697-E25A-423E-A1F5-DD548D9DF78A}'
+	}
+	DirectUICom.SkinObjResBase = s 'SkinObjResBase Class'
+	{
+		CLSID = s '{7819C697-E25A-423E-A1F5-DD548D9DF78A}'
+		CurVer = s 'DirectUICom.SkinObjResBase.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {7819C697-E25A-423E-A1F5-DD548D9DF78A} = s 'SkinObjResBase Class'
+		{
+			ProgID = s 'DirectUICom.SkinObjResBase.1'
+			VersionIndependentProgID = s 'DirectUICom.SkinObjResBase'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{8DFE948B-ABC6-4FCA-8BEF-28FA10C8D799}'
+		}
+	}
+}

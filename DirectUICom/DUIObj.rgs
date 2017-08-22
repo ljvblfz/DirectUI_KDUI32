@@ -1,0 +1,27 @@
+HKCR
+{
+	DirectUICom.DUIObj.1 = s 'DUIObj Class'
+	{
+		CLSID = s '{94DBF17C-B560-44DC-BDBE-0B643CE06580}'
+	}
+	DirectUICom.DUIObj = s 'DUIObj Class'
+	{
+		CLSID = s '{94DBF17C-B560-44DC-BDBE-0B643CE06580}'
+		CurVer = s 'DirectUICom.DUIObj.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {94DBF17C-B560-44DC-BDBE-0B643CE06580} = s 'DUIObj Class'
+		{
+			ProgID = s 'DirectUICom.DUIObj.1'
+			VersionIndependentProgID = s 'DirectUICom.DUIObj'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{8DFE948B-ABC6-4FCA-8BEF-28FA10C8D799}'
+		}
+	}
+}

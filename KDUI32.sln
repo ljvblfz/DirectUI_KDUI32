@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KDUI32", "KDUI32\KDUI32.vcproj", "{0D3202B0-72A3-4AC0-AEF6-BFDBB0202C37}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectUICom", "DirectUICom\DirectUICom.vcproj", "{2A5C093D-BAA5-44E8-9236-F810A4A77BB8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0D3202B0-72A3-4AC0-AEF6-BFDBB0202C37} = {0D3202B0-72A3-4AC0-AEF6-BFDBB0202C37}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DUIButton", "DUIButton\DUIButton.vcproj", "{E33095CF-D455-4924-AFA9-218D673F5FDC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestDirectUI", "TestDirectUI\TestDirectUI.vcproj", "{51AB7A58-98E2-4B96-9D14-599BE5402421}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D3202B0-72A3-4AC0-AEF6-BFDBB0202C37}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0D3202B0-72A3-4AC0-AEF6-BFDBB0202C37}.Debug|Win32.Build.0 = Debug|Win32
+		{0D3202B0-72A3-4AC0-AEF6-BFDBB0202C37}.Release|Win32.ActiveCfg = Release|Win32
+		{0D3202B0-72A3-4AC0-AEF6-BFDBB0202C37}.Release|Win32.Build.0 = Release|Win32
+		{2A5C093D-BAA5-44E8-9236-F810A4A77BB8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2A5C093D-BAA5-44E8-9236-F810A4A77BB8}.Debug|Win32.Build.0 = Debug|Win32
+		{2A5C093D-BAA5-44E8-9236-F810A4A77BB8}.Release|Win32.ActiveCfg = Release|Win32
+		{2A5C093D-BAA5-44E8-9236-F810A4A77BB8}.Release|Win32.Build.0 = Release|Win32
+		{E33095CF-D455-4924-AFA9-218D673F5FDC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E33095CF-D455-4924-AFA9-218D673F5FDC}.Debug|Win32.Build.0 = Debug|Win32
+		{E33095CF-D455-4924-AFA9-218D673F5FDC}.Release|Win32.ActiveCfg = Release|Win32
+		{E33095CF-D455-4924-AFA9-218D673F5FDC}.Release|Win32.Build.0 = Release|Win32
+		{51AB7A58-98E2-4B96-9D14-599BE5402421}.Debug|Win32.ActiveCfg = Debug|Win32
+		{51AB7A58-98E2-4B96-9D14-599BE5402421}.Debug|Win32.Build.0 = Debug|Win32
+		{51AB7A58-98E2-4B96-9D14-599BE5402421}.Release|Win32.ActiveCfg = Release|Win32
+		{51AB7A58-98E2-4B96-9D14-599BE5402421}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,27 @@
+HKCR
+{
+	DirectUICom.DUIRenderDC.1 = s 'DUIRenderDC Class'
+	{
+		CLSID = s '{40F8EA43-94CE-44E0-A54A-B733F7D3DBF5}'
+	}
+	DirectUICom.DUIRenderDC = s 'DUIRenderDC Class'
+	{
+		CLSID = s '{40F8EA43-94CE-44E0-A54A-B733F7D3DBF5}'
+		CurVer = s 'DirectUICom.DUIRenderDC.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {40F8EA43-94CE-44E0-A54A-B733F7D3DBF5} = s 'DUIRenderDC Class'
+		{
+			ProgID = s 'DirectUICom.DUIRenderDC.1'
+			VersionIndependentProgID = s 'DirectUICom.DUIRenderDC'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{8DFE948B-ABC6-4FCA-8BEF-28FA10C8D799}'
+		}
+	}
+}
